@@ -1,0 +1,25 @@
+;; lsp-mode setup
+
+(dolist (mode-list '(cc-mode python-mode php-mode sass-mode scss-mode js2-mode typescript-mode web-mode))
+  (unless (package-installed-p mode-list) (package-install mode-list)))
+
+(use-package lsp-mode
+  :hook ((c-mode c++-mode python-mode php-mode html-mode css-mode sass-mode scss-mode js-mode typescript-mode web-mode) . lsp-deferred)
+  :commands lsp
+
+  :init
+  (setq lsp-idle-delay 0.7)
+  (setq lsp-enable-indentation nil)
+  (setq lsp-enable-on-type-formatting nil)
+  (setq lsp-keep-workspace-alive nil)
+  (setq lsp-completion-provider :capf)
+  (setq lsp-diagnostics-provider :flycheck)
+
+  :config
+  (setq lsp-clients-clangd-executable "/usr/bin/clangd")
+  (setq lsp-pylsp-plugins-pylint-enabled t
+        lsp-pylsp-plugins-pycodestyle-enabled t))
+  (setq lsp-intelephense-global-storage-path "/home/tutu/.nvm/versions/node/v24.13.1/bin/")
+
+(use-package lsp-ivy
+  :after (lsp-mode ivy))

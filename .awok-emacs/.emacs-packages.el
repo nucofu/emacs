@@ -19,49 +19,34 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+;; eksekusi .bashrc .zshrc .shrc
+(use-package exec-path-from-shell
+  :config
+  (exec-path-from-shell-initialize))
+
 ;; ivy setup
 (use-package ivy
   :init
   (ivy-mode 1)
+  (setq ivy-ignore-buffers '("^\\*"))
   (setq ivy-count-format "(%d/%d) "))
 
 ;; magit setup
 (use-package magit)
 
-;; pyvenv
-(use-package pyvenv
-  :init
-  (pyvenv-activate "/home/tutu/.config/lvenv/") ; lvenv is acronym of "local virtual environtment"
-
-  :bind ("s-v" . pyvenv-mode))
-
 ;; flycheck setup
 (use-package flycheck)
 
-;; lsp-mode setup
-(setq lsp-keymap-prefix "s-l")
-(use-package lsp-mode
-  :hook ((c-mode c++-mode python-mode php-mode) . lsp-deferred)
-  :commands lsp
-  
+;; yasnippet setup
+(use-package yasnippet
   :init
-  (setq lsp-idle-delay 0.7)
-  (setq lsp-enable-indentation nil)
-  (setq lsp-enable-on-type-formatting nil)
-  (setq lsp-keep-workspace-alive nil)
-  (setq lsp-completion-provider :capf)
-  (setq lsp-diagnostics-provider :flycheck)
-  
-  :config
-  (setq lsp-clients-clangd-executable "/usr/bin/clangd")
-  (setq lsp-pylsp-server-command '("pylsp")
-        lsp-pylsp-plugins-pylint-enabled t
-        lsp-pylsp-plugins-pycodestyle-enabled t))
+  (yas-global-mode t))
 
-(global-set-key (kbd "s-c l") #'lsp)
+(use-package yasnippet-snippets
+  :after yasnippet)
 
-(use-package lsp-ivy
-  :after (lsp-mode ivy))
+;; LSP-mode
+(load-file "~/.awok-emacs/.emacs-lsp.el")
 
 ;; completation anything
 (use-package company
@@ -72,7 +57,7 @@
   (define-key company-mode-map (kbd "<tab>") 'company-indent-or-complete-common)
 
   :config
-  (setq company-backends '(company-capf company-dabbrev)))
+  (setq company-backends '(company-yasnippet company-capf company-dabbrev)))
 
 ;; for multiple cursors purpose
 (use-package multiple-cursors
