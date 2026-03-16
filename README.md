@@ -7,6 +7,7 @@
 - removing default indentation for c and python
 - seperating lsp configuration into a diffrent file
 - fixing customvar load error
+- fixing <TAB> conflict from company and magit
 
 ### Instalation
 

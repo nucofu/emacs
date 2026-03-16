@@ -22,6 +22,8 @@
 ;; eksekusi .bashrc .zshrc .shrc
 (use-package exec-path-from-shell
   :config
+  (setq exec-path-from-shell-arguments '("-c"))
+  (setq exec-path-from-shell-variables '("PATH"))
   (exec-path-from-shell-initialize))
 
 ;; ivy setup
@@ -54,10 +56,9 @@
 
   :init
   (global-company-mode)
-  (define-key company-mode-map (kbd "<tab>") 'company-indent-or-complete-common)
 
   :config
-  (setq company-backends '(company-yasnippet company-capf company-dabbrev)))
+  (setq company-backends '((company-capf company-dabbrev company-yasnippet))))
 
 ;; for multiple cursors purpose
 (use-package multiple-cursors
