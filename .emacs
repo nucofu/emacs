@@ -3,7 +3,6 @@
 (when (file-exists-p custom-file)
   (load custom-file)) ; changing default custom-set-variable to another file
 
-
 ;; set iosevka font
 (add-to-list 'default-frame-alist '(font . "Iosevka Nerd Font-10"))
 
@@ -11,6 +10,7 @@
 (setq-default indent-tabs-mode nil) ; indentation using space
 (setq-default tab-width 4) ; ukuran 4 spasi
 (setq-default standard-indent 4) ; default offset
+(setq c-basic-offset 4) ; default c indentation
 
 ;; key binding
 (setq grep-command "grep -rn ")

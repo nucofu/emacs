@@ -19,7 +19,6 @@
   (setq lsp-clients-clangd-executable "/usr/bin/clangd")
   (setq lsp-pylsp-plugins-pylint-enabled t
         lsp-pylsp-plugins-pycodestyle-enabled t))
-  (setq lsp-intelephense-global-storage-path "/home/tutu/.nvm/versions/node/v24.13.1/bin/")
 
 (use-package lsp-ivy
   :after (lsp-mode ivy))
